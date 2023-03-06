@@ -93,3 +93,17 @@ export const DELETEPRODUCT = async (req, res) =>{
         res.status(404).send(err);
     }
 }
+
+export const DELETECARRITO = async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const data = await carritoDao.deleteById(id);
+            if(data){
+                res.status(200).send(`El carritp con id ${id} fue eliminado`);
+            }else{
+                res.status(404).send({err: "carrito no encontrado"})
+            }
+    } catch (err) {
+        res.status(404).send(err);
+    }
+}

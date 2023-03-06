@@ -41,15 +41,14 @@ function mail(tipo,datos){
         })
 
         const opts = await transporter.sendMail({
-            from:"virginie.christiansen@ethereal.email",
-            to:getEmail,
+            from:"Pagina Coder",
+            to:process.env.MAIL,
             subject,
             html
         })
 
         try{
-            const info = await transporter.sendMail(opts)
-            console.log(info)
+           await transporter.sendMail(opts)
         }catch(e){
             console.error(e)
         }

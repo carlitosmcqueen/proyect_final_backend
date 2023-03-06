@@ -40,9 +40,6 @@ export const POSTCOMPRA = async (req, res) => {
         const ID = id.id
         const prod = id.carrito[0]._id
         const carritoProductos = await carritoDao.getById(prod)
-        // const data =await compraDao.crearCompra(req.session.user,ID,carritoProductos.productos,domicilio);
-        // res.status(200).send(data);
-        // await carritoDao.deleteAllProducts(prod)
 
         if (carritoProductos.productos.length == 0){
              res.status(500).send("no hay productos en el carrito")

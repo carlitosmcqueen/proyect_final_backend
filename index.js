@@ -19,8 +19,7 @@ const httpServer = createServer(app);
 const io = new Server(httpServer);
 //socket
 io.on("connection", async (socket) => {
-    console.log("se conecto a chatSocket")
-
+    logger.info(`se conecto correctamente a soket`)
     socket.emit("mensajes", await mensajesDao.getMsjs())
     socket.on("mensajes", async (msj) => {
         await mensajesDao.saveMsjs(msj)
@@ -87,7 +86,7 @@ app.all("*",(req,res)=>{
 
 const PORT = process.env.PORT || 8080
 const server = httpServer.listen(PORT, () => {
-     console.log(`Servidor express escuchando en el puerto ${PORT}`)
+    logger.info(`Servidor escuchado en el puerto ${PORT}`)
 })
 
 server.on('error', error => console.log(`Error en servidor ${error}`))

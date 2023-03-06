@@ -25,6 +25,8 @@ router.post("/:id/productos/:id_producto", isAdmin,CarritoService.POSTPRODUCT);
 router.put("/:id",isAdmin,CarritoService.PUTCART)
 router.delete("/:id/productos/:id_prod",isAdmin, CarritoService.DELETEPRODUCT);
 
+router.delete("/:id",isAdmin,CarritoService.DELETECARRITO)
+
 
 
 export { router as carritoRouter}

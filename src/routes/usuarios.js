@@ -1,6 +1,7 @@
 import express from 'express'
 import { Router } from 'express'
-//nuevo intento 
+import {authMw} from "../middlewares/middleware.js";
+
 
 import passport from '../utils/passport.js'
 import * as UsuariosService from "../service/usuario.service.js";
@@ -28,5 +29,6 @@ router.get("/registerError",UsuariosService.REGISTERERROR)
   
 router.get('/logout' ,UsuariosService.LOGOUT)
 
+router.get("/productos",authMw,UsuariosService.PRODUCTOS)
 
 export {router as usuariosRouter}

@@ -4,7 +4,7 @@ const {productosDao} = await daos
 export const GET = async (req, res) => {
     try {
         const data = await productosDao.getAll()
-        res.render('main', {layout: 'productos', user : req.session.user,productos:data})
+        res.status(200).send(data)
 
     } catch (err) {
         res.status(404).send(err);

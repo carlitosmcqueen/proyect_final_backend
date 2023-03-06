@@ -7,11 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   <script src="/socket.io/socket.io.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="/socket.io/socket.io.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
 
   <title>Productos</title>
+
 </head>
 <body>
   <header>
@@ -19,12 +21,17 @@
         <a class="navbar-brand" href="/">Pagina Coder</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="/chat">CHAT
                 <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/chat/mail">Mis mensajes</a>
+            </li>  
+            <li class="nav-item active">
+              <a class="nav-link" href="/productos">Productos</a>
+            </li>  
+
           </ul>
         </div>
         <div class="d-flex p-2">
@@ -38,10 +45,11 @@
     <table  class="table table-primary" align="center">
     <thead>
         <tr class="table-dark">
-            <th>Usuario</th>
-            <th>destinatario</th>
-            <th>mensaje</th>
-            
+            <th>producto</th>
+            <th>precio</th>
+            <th>descripcion</th>
+            <th>categoria</th>
+            <th>Imagen</th>
         </tr>
     </thead>
     {{#each productos}}
@@ -50,7 +58,7 @@
             <td class="table-success"> {{this.price}}</td>
             <td class="table-info">{{this.description}}</td>
             <td class="table-info">{{this.category}}</td>
-            <td><img src={{this.thumbnail}} alt="image"></td>
+            <td width="6vw"><img class="imagenProd" src={{this.thumbnail}} alt="image"></td>
 
         </tr>
     {{/each}}
