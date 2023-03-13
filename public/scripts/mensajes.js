@@ -42,3 +42,9 @@ const renderMsj = (msj) => {
 
     return false
 }
+
+const botonComprar = document.getElementById("botonComprar")
+
+botonComprar.addEventListener("click", () => {
+    console.log("se compro")
+})

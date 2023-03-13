@@ -41,30 +41,35 @@
       </nav>
     </header>
     <main>
-         <h2>Mis Mensajes</h2>
-    <table  class="table table-primary" align="center">
-    <thead>
-        <tr class="table-dark">
+      <h2>Mis Mensajes</h2>
+      {{!-- <table  class="table table-primary" align="center">
+        <thead>
+          <tr class="table-dark">
             <th>producto</th>
             <th>precio</th>
             <th>descripcion</th>
             <th>categoria</th>
             <th>Imagen</th>
-        </tr>
-    </thead>
-    {{#each productos}}
-        <tr> 
-            <td class="table-info">{{this.title}}</td>
-            <td class="table-success"> {{this.price}}</td>
-            <td class="table-info">{{this.description}}</td>
-            <td class="table-info">{{this.category}}</td>
-            <td width="6vw"><img class="imagenProd" src={{this.thumbnail}} alt="image"></td>
+            <th>id</th>
+            </tr>
+            </thead>
+            {{#each productos}}
+            <tr> 
+              <td class="table-info">{{this.title}}</td>
+              <td class="table-success"> {{this.price}}</td>
+              <td class="table-info">{{this.description}}</td>
+              <td class="table-info">{{this.category}}</td>
+              <td width="6vw"><img class="imagenProd" src={{this.thumbnail}} alt="image"></td>
+              <td class="table-info"><input type="button" name="comprar" id="botonComprar" value={{this._id}}></td>
+            </tr>
+            {{/each}}
+      </table> --}}
+            <div id="divProductos"></div>
 
-        </tr>
-    {{/each}}
-
-</table>
     </main>
-  
 </body>
+    <script type="module" src ="../scripts/productos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+
 </html>

@@ -36,5 +36,6 @@ export const LOGOUT = async (req, res) => {
 
 export const PRODUCTOS = async (req,res)=>{
     const data = await productosDao.getAll()
-        res.render('main', {layout: 'productos', user : req.session.user,productos:data})
+    
+    res.render('main', {layout: 'productos', user : req.session.user,productos:data})
 }
