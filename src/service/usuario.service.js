@@ -1,5 +1,5 @@
 import daos from "../daos/DaoFactory.js";
-const {productosDao} = await daos
+const {productosDao,usuariosDao} = await daos
 
 export const GETLOGIN = async (req,res) => {
     try{
@@ -34,8 +34,18 @@ export const LOGOUT = async (req, res) => {
     }
 }
 
+export const DATA = async (req, res) => {
+    const dataInfo = await usuariosDao.IdUser(req.session.user)
+    res.status(200).send(dataInfo)
+
+}
+
 export const PRODUCTOS = async (req,res)=>{
     const data = await productosDao.getAll()
     
     res.render('main', {layout: 'productos', user : req.session.user,productos:data})
+}
+
+export const CARRITO = async (req, res) => {
+    res.render('main', {layout: 'carrito',user: req.session.user})
 }

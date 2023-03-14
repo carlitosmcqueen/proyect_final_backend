@@ -45,13 +45,15 @@ class carritoDaoMongo extends ContenedorMongo{
           productList.cant -= 1;
           await this.db.updateOne({_id:id},{productos:carrito.productos}).lean()
           logger.info(`se elimino un elemento del producto del ${ProductoCompleto.title}`)
+          if(productList.cant == 0){
+            await this.db.updateOne({_id:id},{$pull:{productos:ProductoCompleto}}).lean()
+            logger.info("se borro el producto del carrito")
+            return `se borro el producto del carrito`
+          }
           return `se elimino un elemento del producto del ${ProductoCompleto.title}`
+          
         }
-        if(productList.cant == 0){
-          await this.db.updateOne({_id:id},{$pull:{productos:ProductoCompleto}}).lean()
-          logger.info("se borro el producto del carrito")
-          return `se borro el producto del carrito`
-        }
+       
       }catch(error){
         logger.error(`error al borrar producto del carrito: ${error}`)
       } 

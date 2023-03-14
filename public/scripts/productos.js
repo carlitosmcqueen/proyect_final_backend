@@ -94,7 +94,6 @@
 // mostrarProductosCategory("arroz")
 
 const mostrarProductos =()=>{
-
     fetch("/api/productos")
     .then((response)=> response.json())
     .then((json)=>{
@@ -103,11 +102,8 @@ const mostrarProductos =()=>{
         const prodHtml =prodController({productos})
         document.getElementById('divProductos').innerHTML = prodHtml
         botonesAgregar()
-        
     })
-    
 }
-
 
 
 const botonesAgregar=() =>{

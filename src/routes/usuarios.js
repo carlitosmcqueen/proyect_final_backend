@@ -29,6 +29,10 @@ router.get("/registerError",UsuariosService.REGISTERERROR)
   
 router.get('/logout' ,UsuariosService.LOGOUT)
 
+//prueba 
+router.get("/dataUsuario",UsuariosService.DATA)
+
 router.get("/productos",authMw,UsuariosService.PRODUCTOS)
+router.get("/carrito",authMw,UsuariosService.CARRITO)
 
 export {router as usuariosRouter}

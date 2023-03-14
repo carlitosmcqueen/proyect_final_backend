@@ -1,7 +1,26 @@
+
+
 const idCompra = await fetch("/api/compra").then(res => res.json()).then((json)=>{
     const id =json[0]._id
     return id
 })
+
+
+const idUser = await fetch("/dataUsuario")
+.then(res => res.json())
+.then((json)=>{
+    return json
+})
+
+const carritoActivo = await fetch(`/api/carrito/${idUser.carrito[0]._id}`)
+.then(res=> res.json())
+.then((json)=>{
+    return json
+})
+const mostrar = async()=>{
+    console.log(carritoActivo)
+}
+
 const idCar = await fetch("/api/carrito")
     .then(response=>response.json())
     .then((json)=>{
@@ -10,32 +29,39 @@ const idCar = await fetch("/api/carrito")
 })
 
 
+
 const mostrarCarrito =()=>{
     fetch("/api/carrito")
     .then((response)=> response.json())
     .then((json)=>{
         const idCarrito = json[0]._id
-        const carrito = Object.assign({}, json[0].productos)
+        const carrito = Object.assign({}, carritoActivo.productos)
         const prodController= Handlebars.compile(viewCarrito)
         const prodHtml =prodController({carrito})
         document.getElementById('divCarrito').innerHTML = prodHtml
         finalizarCompra(idCarrito)
-        botonesQuitar(idCarrito)
+        botonesQuitar(idCarrito)  
         
     })
-
 }
 
-const finalizarCompra =(idCarrito)=>{
+const domicilioInput = document.getElementById("domicilio")
+const domicilioInputJSON = (domicilioInput)
+
+const finalizarCompra =()=>{
     const boton = document.getElementById("finalizarCompra")
     boton.addEventListener("click",(e)=>{
         e.preventDefault()
-        fetch(`/api/compra/${idCompra}/carrito/${idCarrito}`,{
+        fetch(`/api/compra`,{
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
+            },
+            body:{
+                domicilio: JSON.stringify(domicilioInput)
             }
+
         })
         .then(res=>{
             console.log("se logro con exito la compra");
@@ -43,7 +69,7 @@ const finalizarCompra =(idCarrito)=>{
     })
 }
 
-const botonesQuitar =(idCarrito)=>{
+const botonesQuitar =()=>{
     const tabla= document.getElementById('tablaCarrito')
     const botones = tabla.querySelectorAll("button")
 
@@ -51,12 +77,12 @@ const botonesQuitar =(idCarrito)=>{
         botones[i].addEventListener('click',(e)=>{
           e.preventDefault()
           const idProductos = e.target.value
-          quitarProducto(idCarrito,idProductos) 
+          quitarProducto(idProductos) 
         },false)
       }
 }
-const quitarProducto =(idCarrito,idProductos)=>{
-    fetch(`api/carrito/${idCarrito}/productos/${idProductos}`,{
+const quitarProducto =(idProductos)=>{
+    fetch(`/api/carrito/producto/${idProductos}`,{
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
@@ -69,6 +95,9 @@ const quitarProducto =(idCarrito,idProductos)=>{
 
 
 }
+
+
+
 
 const viewCarrito= `
 <div class="container mt-3">
@@ -90,10 +119,14 @@ const viewCarrito= `
         </tr>
     {{/each}}
 </table>
+
+<input type="text" name="domicilio" id="domicilio">
+
+
   <div>
     <button  id="finalizarCompra" class="btn btn-info comprar">Finalizar Compra</button>
   </div>
 `
 
 mostrarCarrito()
-
+mostrar()
